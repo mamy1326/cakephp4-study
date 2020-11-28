@@ -1,10 +1,10 @@
 <?php
 return [
     'Theme' => [
-        'title' => 'AdminLTE',
+        'title' => '【管理画面】トータルホームサービスはなまる',
         'logo' => [
-            'mini' => '<b>A</b>LT',
-            'large' => '<b>Admin</b>LTE'
+            'mini' => '<b>L</b>',
+            'large' => "<img src='/img/logo.png' alt='トータルホームサービスはなまる' style='width:110px'>",
         ],
         'login' => [
             'show_remember' => true,

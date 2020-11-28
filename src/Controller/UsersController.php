@@ -17,32 +17,6 @@ class UsersController extends AppController
     }
 
     /**
-     * Login method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function login()
-    {
-        $result = $this->Authentication->getResult();
-        // 認証成功
-        if ($result->isValid()) {
-//            $target = $this->Authentication->getLoginRedirect() ?? '/home';
-            $target = '/home';
-            return $this->redirect($target);
-        }
-        // ログインできなかった場合
-        if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error('Invalid email or password');
-        }
-    }
-
-    public function logout()
-    {
-        $this->Authentication->logout();
-        return $this->redirect(['action' => 'login']);
-    }
-
-    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
