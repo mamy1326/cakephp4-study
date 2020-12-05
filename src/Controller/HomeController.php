@@ -9,7 +9,12 @@ class HomeController extends AppController
     {
         $this->loadModel('Users');
         echo '<h1>1. Authentication コンポーネントで取得</h1>';
-        $user = $this->Users->find()->toList();
+        $query = $this->Users->find();
+        $user = $query
+            ->select([
+                'usernames' => $query->func()->group_concat(['username' => 'identifier']),
+            ])
+            ->toList();
         debug($user);
     
         echo '<h1>2. request で取得</h1>';

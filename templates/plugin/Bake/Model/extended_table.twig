@@ -1,19 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Table;
+namespace {{ namespace }}\Model\Table;
 
-use App\Model\Baked\Table\UsersTable as BakedTable;
+use {{ namespace }}\Model\Baked\Table\{{ name }}Table as BakedTable;
 
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
-use Cake\Validation\Validator;
+{% set uses = ['use Cake\\ORM\\Query;', 'use Cake\\ORM\\RulesChecker;', 'use Cake\\ORM\\Table;', 'use Cake\\Validation\\Validator;'] %}
+{{ uses|join('\n')|raw }}
 
 /**
  * {@inheritDoc}
  */
-class UsersTable extends BakedTable
+class {{ name }}Table extends BakedTable
 {
     /**
      * Initialize method
@@ -25,6 +23,8 @@ class UsersTable extends BakedTable
     {
         parent::initialize($config);
     }
+{{- "\n" }}
+{%- if validation %}
     /**
      * Default validation rules.
      *
@@ -36,6 +36,8 @@ class UsersTable extends BakedTable
         parent::validationDefault($validator);
         return $validator;
     }
+{% endif %}
+{%- if rulesChecker %}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -48,4 +50,5 @@ class UsersTable extends BakedTable
         parent::buildRules($rules);
         return $rules;
     }
+{% endif %}
 }

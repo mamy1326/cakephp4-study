@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo Configure::read('Theme.title'); ?> | <?php echo $this->fetch('title'); ?></title>
+    <title><?php echo Configure::read('Theme.title'); ?> | パスワードリマインダー</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -27,12 +27,11 @@
     <div class="users form content">
         <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('ログインしてください') ?></legend>
-            <?= $this->Form->control('email') ?>
+            <legend><?= __('メールアドレスを入力してください') ?></legend>
             <?= $this->Form->control('password') ?>
-            パスワードを忘れた方は <?= $this->Html->link('コチラ', '/password-resets/reset', ['class' => 'button', 'target' => '_blank']); ?>
+            <?= $this->Form->control('password_check') ?>
         </fieldset>
-        <?= $this->Form->button(__('Login')); ?>
+        <?= $this->Form->button(__('パスワードリセットを実行する')); ?>
         <?= $this->Form->end() ?>
     </div>
 </div>
