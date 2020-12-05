@@ -8,6 +8,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/admin_l_t_e/bower_components/bootstrap/dist/css/bootstrap.min.css"/><link rel="stylesheet" href="/admin_l_t_e/css/AdminLTE.min.css"/>
     <?php echo $this->fetch('css'); ?>
     <?php echo $this->Html->css('AdminLTE./bower_components/bootstrap/dist/css/bootstrap.min', ['block' => 'css']); ?>
     <!-- Theme style -->
@@ -30,9 +31,9 @@
             <legend><?= __('ログインしてください') ?></legend>
             <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
-            パスワードを忘れた方は <?= $this->Html->link('コチラ', '/password-resets/reset', ['class' => 'button', 'target' => '_blank']); ?>
+            パスワードを忘れた方は <?= $this->Html->link('コチラ', '/password-resets/input-email', ['class' => 'button', 'target' => '_blank']); ?>
         </fieldset>
-        <?= $this->Form->button(__('Login')); ?>
+        <?= $this->Form->button(__('ログイン')); ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

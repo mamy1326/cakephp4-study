@@ -17,7 +17,7 @@ class PasswordResetsController extends AppController
 {
     public function beforeFilter(EventInterface $event)
     {
-        $this->Authentication->allowUnauthenticated(['reset']);
+        $this->Authentication->allowUnauthenticated(['inputEmail']);
     }
 
     public function initialize(): void
@@ -27,17 +27,19 @@ class PasswordResetsController extends AppController
         $this->loadModel('Users');
     }
 
-    public function reset()
+    public function inputEmail()
     {
-        $this->viewBuilder()->setLayout('reset');
+        $this->viewBuilder()->setLayout('input_email');
 
         if (!$this->request->is('post')) {
             return;
         }
 
         $params = $this->request->getQuery();
+debug($params);
+exit;
         $email = $params['email'];
-        $user = $this->users->find()
+        $user = $this->Users->find()
             ->where(['email ' => $email])
             ->first();
 

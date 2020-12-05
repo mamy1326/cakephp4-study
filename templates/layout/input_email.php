@@ -8,6 +8,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/admin_l_t_e/bower_components/bootstrap/dist/css/bootstrap.min.css"/><link rel="stylesheet" href="/admin_l_t_e/css/AdminLTE.min.css"/>
     <?php echo $this->fetch('css'); ?>
     <?php echo $this->Html->css('AdminLTE./bower_components/bootstrap/dist/css/bootstrap.min', ['block' => 'css']); ?>
     <!-- Theme style -->
@@ -27,9 +28,8 @@
     <div class="users form content">
         <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('メールアドレスを入力してください') ?></legend>
-            <?= $this->Form->control('password') ?>
-            <?= $this->Form->control('password_check') ?>
+            <legend><?= __('emailを入力してください') ?></legend>
+            <?= $this->Form->control('email') ?>
         </fieldset>
         <?= $this->Form->button(__('パスワードリセットを実行する')); ?>
         <?= $this->Form->end() ?>
