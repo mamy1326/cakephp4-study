@@ -1,10 +1,10 @@
 <?php
 return [
     'Theme' => [
-        'title' => '【管理画面】トータルホームサービスはなまる',
+        'title' => '【管理画面】CakePHP4 study',
         'logo' => [
             'mini' => '<b>L</b>',
-            'large' => "<img src='/img/logo.png' alt='トータルホームサービスはなまる' style='width:110px'>",
+            'large' => "<img src='/img/cake-logo.png' alt='CakePHP4 study' style='width:110px'>",
         ],
         'login' => [
             'show_remember' => true,

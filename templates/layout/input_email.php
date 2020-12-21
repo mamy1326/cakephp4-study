@@ -21,7 +21,7 @@
 <div class="login-box">
     <div class="login-logo">
         <a href="/" >
-            <img class="p-pc-header__logo" src="/img/logo.png" alt="ths">
+            <img class="p-pc-header__logo" src="/img/logo.png" alt="study">
         </a>
     </div>
     <?= $this->Flash->render() ?>
