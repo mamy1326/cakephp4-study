@@ -16,6 +16,7 @@
     },
     "require-dev": {
         "cakephp/bake": "^2.0.3",
+        "lancers/cakephp-generation-gap-pattern-model-baker": "1.*",
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.1",
         "josegonzalez/dotenv": "^3.2",
