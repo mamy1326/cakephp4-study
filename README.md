@@ -1,53 +1,112 @@
-# CakePHP Application Skeleton
+# 概要
+CakePHP 4 の自己学習用リポジトリです。
+https://github.com/mamy1326/cakephp4-study-playbook　とセットです。
 
-[![Build Status](https://img.shields.io/github/workflow/status/cakephp/app/CakePHP%20App%20CI/master?style=flat-square)](https://github.com/cakephp/app/actions)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
+## 環境構築
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+1. ローカルマシンに任意のディレクトリを作成
 
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
-
-```bash
-composer create-project --prefer-dist cakephp/app
+```
+mkdir ~/cakephp4-study
+cd ~/cakephp4-study
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+2. docker 環境構築リポジトリを clone
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+```
+git clone git@github.com:mamy1326/cakephp4-study-playbook.git infrastructure
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+3. 当リポジトリを clone
 
-```bash
-bin/cake server -p 8765
+```
+git clone git@github.com:mamy1326/cakephp4-study.git backend
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+4. docker コンテナ起動
 
-## Update
+- コンテナ構築と起動
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+```
+docker-compose up -d
+(初回は多くのログが流れます)
+```
 
-## Configuration
+- composer install
 
-Read and edit the environment specific `config/app_local.php` and setup the 
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+```
+# コンテナに入る
+docker exec -it docker-cakephp4_app_1 bash
 
-## Layout
+# コンテナ内で composer install
+composer install
+```
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+5. アプリケーション起動
+
+http://127.0.0.1:8080/
+
+6. ログイン用テストアカウント作成
+
+- DB コンテナに入る
+
+```
+docker exec -it docker-cakephp4_db_1 bash
+```
+
+- MySQL ログイン
+    - PW: `secret`
+
+```
+mysql -umy_app  my_app -p
+```
+
+- users テーブル作成
+
+```sql
+CREATE TABLE `users` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `username` varchar(255) NOT NULL,
+ `email` varchar(255) NOT NULL,
+ `password` varchar(255) NOT NULL,
+ `created` datetime NOT NULL,
+ `modified` datetime NOT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `email` (`email`)
+)
+```
+
+- テストユーザー作成
+    - PW: `p@ssw0rd`
+
+```sql
+insert into users(
+    username,
+    email,
+    password,
+    created,
+    modified
+)
+values(
+    'test user',
+    'test@example.com',
+    '$2y$10$chRR/dnRQgyJ4gVlscsIc.aiDsFs1QUT/.AiCfPf.Rru5LixtAfP6',
+    now(),
+    now()
+);
+```
+
+7. `config/app_local.php` の修正
+    - host を `localhost` から `db` に修正
+
+```php
+    'Datasources' => [
+        'default' => [
+            'host' => 'db',
+```
+
+8. メールアドレス、PW でログイン
+
+## 備考
+パスワードリマインダーは実装中 (2020/12/21 時点)
